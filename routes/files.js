@@ -45,9 +45,9 @@ var db;
 exports.findById = function(req, res) {
     var id = req.params.id;
     console.log('Retrieving file: ' + id);
-    MongoClient.connect("mongodb://mongo:mongo@oceanic.mongohq.com:10068/app20508396", {native_parser:true}, function(err, db) {
+    MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755", {native_parser:true}, function(err, db) {
         if(!err) {
-            console.log("Connected to 'app20508396' database");
+            console.log("Connected to 'app25960755' database");
             db.collection('files', function(err, collection) {
                 collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
                     delete item._id;
@@ -61,9 +61,9 @@ exports.findById = function(req, res) {
 
 exports.findAll = function(req, res) {
     var filelist = new Object();
-    MongoClient.connect("mongodb://mongo:mongo@oceanic.mongohq.com:10068/app20508396", {native_parser:true}, function(err, db) {
+    MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755", {native_parser:true}, function(err, db) {
         if(!err) {
-            console.log("Connected to 'app20508396' database");
+            console.log("Connected to 'app25960755' database");
             this.db = db;
             db.collection('files', function(err, collection) {
                 collection.find({}, function(err, resultCursor) {
@@ -89,9 +89,9 @@ exports.findAll = function(req, res) {
 exports.addFile = function(req, res) {
     var file = req.body;
     console.log('Adding file : ' + JSON.stringify(file));
-    MongoClient.connect("mongodb://mongo:mongo@oceanic.mongohq.com:10068/app20508396", {native_parser:true}, function(err, db) {
+    MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755", {native_parser:true}, function(err, db) {
         if(!err) {
-            console.log("Connected to 'app20508396' database");
+            console.log("Connected to 'app25960755' database");
             this.db = db;
             db.collection('files', function(err, collection) {
                 collection.insert(file, {safe:true}, function(err, result) {
@@ -113,9 +113,9 @@ exports.updateFile = function(req, res) {
     var file = req.body;
     console.log('Updating file: ' + id);
     console.log(JSON.stringify(file));
-    MongoClient.connect("mongodb://mongo:mongo@oceanic.mongohq.com:10068/app20508396", {native_parser:true}, function(err, db) {
+    MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755", {native_parser:true}, function(err, db) {
         if(!err) {
-            console.log("Connected to 'app20508396' database");
+            console.log("Connected to 'app25960755' database");
             this.db = db;
             db.collection('files', function(err, collection) {
                 collection.update({'_id':new BSON.ObjectID(id)}, file, {safe:true}, function(err, result) {
@@ -136,9 +136,9 @@ exports.updateFile = function(req, res) {
 exports.deleteFile = function(req, res) {
     var id = req.params.id;
     console.log('Deleting file: ' + id);
-    MongoClient.connect("mongodb://mongo:mongo@oceanic.mongohq.com:10068/app20508396", {native_parser:true}, function(err, db) {
+    MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755", {native_parser:true}, function(err, db) {
         if(!err) {
-            console.log("Connected to 'app20508396' database");
+            console.log("Connected to 'app25960755' database");
             this.db = db;
             db.collection('files', function(err, collection) {
                 collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
