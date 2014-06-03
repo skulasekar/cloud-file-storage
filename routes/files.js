@@ -72,7 +72,7 @@ exports.getRaml = function(req, res) {
                     collection.findOne({'name':id}, function(err, item) {
                         delete item._id;
                         res.header("Access-Control-Allow-Origin", "*");
-                        res.send(item.contents);
+                        res.send(decodeURI(item.contents));
                     });
                 }
             });
