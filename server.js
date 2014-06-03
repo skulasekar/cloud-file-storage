@@ -27,7 +27,6 @@ var allowCrossDomain = function(req, res, next) {
         next();
     }
 };
-
 app.use(allowCrossDomain);
  
 app.get('/files', files.findAll);
@@ -35,6 +34,7 @@ app.get('/files/:id', files.findById);
 app.post('/files', files.addFile);
 app.put('/files/:id', files.updateFile);
 app.delete('/files/:id', files.deleteFile);
+app.get('/raml/:id', files.getRaml);
 
 
 app.listen(process.env.PORT || 5000);

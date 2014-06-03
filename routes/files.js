@@ -49,11 +49,32 @@ exports.findById = function(req, res) {
         if(!err) {
             console.log("Connected to 'app25960755' database");
             db.collection('files', function(err, collection) {
-                collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
-                    delete item._id;
-                    res.header("Access-Control-Allow-Origin", "*");
-                    res.send(item);
-                });
+                if(id != null && id != 'undefined') {
+                    collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
+                        delete item._id;
+                        res.header("Access-Control-Allow-Origin", "*");
+                        res.send(item);
+                    });
+                }
+            });
+        }
+    });
+};
+
+exports.getRaml = function(req, res) {
+    var id = req.params.id;
+    console.log('Retrieving file: ' + id);
+    MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755", {native_parser:true}, function(err, db) {
+        if(!err) {
+            console.log("Connected to 'app25960755' database");
+            db.collection('files', function(err, collection) {
+                if(id != null && id != 'undefined') {
+                    collection.findOne({'name':id}, function(err, item) {
+                        delete item._id;
+                        res.header("Access-Control-Allow-Origin", "*");
+                        res.send(item.contents);
+                    });
+                }
             });
         }
     });
@@ -112,7 +133,7 @@ exports.updateFile = function(req, res) {
     var id = req.params.id;
     var file = req.body;
     console.log('Updating file: ' + id);
-    console.log(JSON.stringify(file));
+    console.log(file    );
     MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755", {native_parser:true}, function(err, db) {
         if(!err) {
             console.log("Connected to 'app25960755' database");
