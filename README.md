@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # RAML Store
 
 
@@ -74,4 +73,3 @@ Thanks to Christophe Coenraets, this API is based on his simple and easy-to-foll
 =======
 raml-store
 ==========
->>>>>>> b16f6855a2375d6ba8381353593326245f8dcbcc
