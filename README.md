@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RAML Store
 
 
@@ -70,3 +71,7 @@ The important code is the script beginning at line 75, ending at line 202.
 
 ## Acknowledgements
 Thanks to Christophe Coenraets, this API is based on his simple and easy-to-follow tutorial at http://coenraets.org/blog/2012/10/creating-a-rest-api-using-node-js-express-and-mongodb/
+=======
+raml-store
+==========
+>>>>>>> b16f6855a2375d6ba8381353593326245f8dcbcc
