@@ -6,7 +6,14 @@ var Server = mongo.Server,
     BSON = mongo.BSONPure;
 
 var server = new Server('oceanic.mongohq.com', 10068, {auto_reconnect: true});
-var db;
+
+var db = MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755", {native_parser:true}, function(err, db) {
+    if(!err) {
+        return db;
+    } else {
+        console.log("Could not connect to database");
+    }
+});
 
 //MongoClient.connect("mongodb://oceanic.mongohq.com:10068/app20508396", {native_parser:true}, function(err, db) {
 //    if(!err) {
