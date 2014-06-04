@@ -90,6 +90,9 @@ exports.getRaml = function(req, res) {
                             res.header("Access-Control-Allow-Origin", "*");
                             res.header("Content-Type", "application/json")
                             res.send(decodeURI(item.contents));
+                        } else if(id == 'test') {
+                            res.header("Access-Control-Allow-Origin", "*");
+                            res.send('Test Success');
                         } else {
                             res.header("Access-Control-Allow-Origin", "*");
                             res.send({'error':'Id not found.'});
