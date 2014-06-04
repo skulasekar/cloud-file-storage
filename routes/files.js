@@ -62,8 +62,14 @@ exports.findById = function(req, res) {
                             delete item._id;
                             res.header("Access-Control-Allow-Origin", "*");
                             res.send(item);
+                        } else {
+                            res.header("Access-Control-Allow-Origin", "*");
+                            res.send({'error':'Id not found.'});
                         }
                     });
+                } else{
+                    res.header("Access-Control-Allow-Origin", "*");
+                    res.send({'error':'An error has occurred'});
                 }
             });
         }
@@ -84,8 +90,14 @@ exports.getRaml = function(req, res) {
                             res.header("Access-Control-Allow-Origin", "*");
                             res.header("Content-Type", "application/json")
                             res.send(decodeURI(item.contents));
+                        } else {
+                            res.header("Access-Control-Allow-Origin", "*");
+                            res.send({'error':'Id not found.'});
                         }
                     });
+                } else{
+                    res.header("Access-Control-Allow-Origin", "*");
+                    res.send({'error':'An error has occurred'});
                 }
             });
         }
