@@ -51,9 +51,11 @@ exports.findById = function(req, res) {
             db.collection('files', function(err, collection) {
                 if(id != null && id != 'undefined') {
                     collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
-                        delete item._id;
-                        res.header("Access-Control-Allow-Origin", "*");
-                        res.send(item);
+                        if(!err){
+                            delete item._id;
+                            res.header("Access-Control-Allow-Origin", "*");
+                            res.send(item);
+                        }
                     });
                 }
             });
@@ -70,9 +72,12 @@ exports.getRaml = function(req, res) {
             db.collection('files', function(err, collection) {
                 if(id != null && id != 'undefined') {
                     collection.findOne({'name':id}, function(err, item) {
-                        delete item._id;
-                        res.header("Access-Control-Allow-Origin", "*");
-                        res.send(decodeURI(item.contents));
+                        if(!err) {
+                            delete item._id;
+                            res.header("Access-Control-Allow-Origin", "*");
+                            res.header("Content-Type", "application/json")
+                            res.send(decodeURI(item.contents));
+                        }
                     });
                 }
             });
@@ -88,18 +93,20 @@ exports.findAll = function(req, res) {
             this.db = db;
             db.collection('files', function(err, collection) {
                 collection.find({}, function(err, resultCursor) {
-                    resultCursor.each(function(err,item) {
-                        if(item != null){
-                            console.log('Item : '+item._id+' : ' + JSON.stringify(item));
-                            filelist[item._id] = item;
-                            delete filelist[item._id]._id;
-                            console.log(JSON.stringify(filelist));
-                        }
-                        else{
-                            res.header("Access-Control-Allow-Origin", "*");
-                            res.send(JSON.stringify(filelist));
-                        }
-                    });
+                    if(!err) {
+                        resultCursor.each(function(err,item) {
+                            if(item != null){
+                                console.log('Item : '+item._id+' : ' + JSON.stringify(item));
+                                filelist[item._id] = item;
+                                delete filelist[item._id]._id;
+                                console.log(JSON.stringify(filelist));
+                            }
+                            else{
+                                res.header("Access-Control-Allow-Origin", "*");
+                                res.send(JSON.stringify(filelist));
+                            }
+                        });
+                    }
                 });
             });
         }
@@ -109,7 +116,7 @@ exports.findAll = function(req, res) {
 
 exports.addFile = function(req, res) {
     var file = req.body;
-    console.log('Adding file : ' + JSON.stringify(file));
+//    console.log('Adding file : ' + JSON.stringify(file));
     MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755", {native_parser:true}, function(err, db) {
         if(!err) {
             console.log("Connected to 'app25960755' database");
@@ -132,8 +139,8 @@ exports.addFile = function(req, res) {
 exports.updateFile = function(req, res) {
     var id = req.params.id;
     var file = req.body;
-    console.log('Updating file: ' + id);
-    console.log(file    );
+//    console.log('Updating file: ' + id);
+//    console.log(file    );
     MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755", {native_parser:true}, function(err, db) {
         if(!err) {
             console.log("Connected to 'app25960755' database");
@@ -156,7 +163,7 @@ exports.updateFile = function(req, res) {
 
 exports.deleteFile = function(req, res) {
     var id = req.params.id;
-    console.log('Deleting file: ' + id);
+//    console.log('Deleting file: ' + id);
     MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755", {native_parser:true}, function(err, db) {
         if(!err) {
             console.log("Connected to 'app25960755' database");
@@ -176,6 +183,7 @@ exports.deleteFile = function(req, res) {
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
+
 // Populate database with sample data -- Only used once: the first time the application is started.
 // You'd typically not find this code in a real-life app, since the database would already exist.
 var populateDB = function() {
