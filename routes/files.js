@@ -59,12 +59,14 @@ exports.findById = function(req, res) {
                 if(id != null && id != 'undefined') {
                     collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
                         if(!err){
-                            delete item._id;
-                            res.header("Access-Control-Allow-Origin", "*");
-                            res.send(item);
-                        } else {
-                            res.header("Access-Control-Allow-Origin", "*");
-                            res.send({'error':'Id not found.'});
+                            if(item != null) {
+                                delete item._id;
+                                res.header("Access-Control-Allow-Origin", "*");
+                                res.send(item);
+                            } else {
+                                res.header("Access-Control-Allow-Origin", "*");
+                                res.send({'error':'Id not found.'});
+                            }
                         }
                     });
                 } else{
@@ -86,16 +88,17 @@ exports.getRaml = function(req, res) {
                 if(id != null && id != 'undefined') {
                     collection.findOne({'name':id}, function(err, item) {
                         if(!err) {
-                            delete item._id;
-                            res.header("Access-Control-Allow-Origin", "*");
-                            res.header("Content-Type", "application/json")
-                            res.send(decodeURI(item.contents));
+                            if(item != null) {
+                                res.header("Access-Control-Allow-Origin", "*");
+                                res.header("Content-Type", "application/json")
+                                res.send(decodeURI(item.contents));
+                            } else {
+                                res.header("Access-Control-Allow-Origin", "*");
+                                res.send({'error':'Id not found.'});
+                            }
                         } else if(id == 'test') {
                             res.header("Access-Control-Allow-Origin", "*");
                             res.send('Test Success');
-                        } else {
-                            res.header("Access-Control-Allow-Origin", "*");
-                            res.send({'error':'Id not found.'});
                         }
                     });
                 } else{
@@ -148,7 +151,7 @@ exports.addFile = function(req, res) {
                     if (err) {
                         res.send({'error':'An error has occurred'});
                     } else {
-                        console.log('Success: ' + JSON.stringify(result[0]));
+//                        console.log('Success: ' + JSON.stringify(result[0]));
                         res.header("Access-Control-Allow-Origin", "*");
                         res.send(result[0]);
                     }
