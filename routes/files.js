@@ -15,40 +15,6 @@ var db = MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app
     }
 });
 
-//MongoClient.connect("mongodb://oceanic.mongohq.com:10068/app20508396", {native_parser:true}, function(err, db) {
-//    if(!err) {
-//        console.log("Connected to 'app20508396' database");
-//        this.db = db;
-//        db.collection('files', {strict:true}, function(err, collection) {
-//            if (err) {
-//                console.log("The 'files' collection doesn't exist. Use POST to add RAML files...");
-//                var files = [
-//                    {
-//                        name: "ExampleRAML",
-//                        path: "%2F",
-//                        contents: "gggggg"
-//                    }];
-//
-//                db.collection('files', function(err, collection) {
-//                    collection.insert(files, {safe:true}, function(err, result) {});
-//                });
-//            }
-//        });
-//    }
-//});
-
-//db.open(function(err, db) {
-//    if(!err) {
-//        console.log("Connected to 'app20508396' database");
-//        db.collection('files', {strict:true}, function(err, collection) {
-//            if (err) {
-//                console.log("The 'files' collection doesn't exist. Use POST to add RAML files...");
-//                populateDB();
-//            }
-//        });
-//    }
-//});
-
 exports.findById = function(req, res) {
     var id = req.params.id;
     console.log('Retrieving file: ' + id);
