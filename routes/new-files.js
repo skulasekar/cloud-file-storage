@@ -38,7 +38,8 @@ exports.getRaml = function(req, res) {
                 if(item != null) {
                     delete item._id;
                     res.header("Access-Control-Allow-Origin", "*");
-                    res.send(item);
+                    res.header("Content-Type", "application/json")
+                    res.send(decodeURI(item.contents));
                 } else {
                     res.header("Access-Control-Allow-Origin", "*");
                     res.send({'error':'Id not found.'});
