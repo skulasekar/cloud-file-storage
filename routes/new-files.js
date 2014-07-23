@@ -33,7 +33,7 @@ exports.getRaml = function(req, res) {
     var id = req.params.id;
     console.log('Retrieving file: ' + id);
     if(id != null && id != 'undefined') {
-        FileModel.findOne(req.params.id, function (err, item) {
+        FileModel.findOne({'name':id}, function (err, item) {
             if(!err){
                 if(item != null) {
                     delete item._id;
