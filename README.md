@@ -1,3 +1,5 @@
+[ ![Codeship Status for cablelabs/raml-store](https://www.codeship.io/projects/6635ed60-ce43-0131-97f0-76c7aeca9038/status?branch=master)](https://www.codeship.io/projects/22888)
+
 # RAML Store
 
 
