@@ -34,12 +34,12 @@ var allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
  
-app.get('/files', files.deprecated);
-app.get('/files/:id', files.deprecated);
-app.post('/files', files.deprecated);
-app.put('/files/:id', files.deprecated);
-app.delete('/files/:id', files.deprecated);
-app.get('/raml/:id', files.deprecated);
+app.get('/files', newFiles.findAll);
+app.get('/files/:id', newFiles.findById);
+app.post('/files', newFiles.addFile);
+app.put('/files/:id', newFiles.updateFile);
+app.delete('/files/:id', newFiles.deleteFile);
+app.get('/raml/:id', newFiles.getRaml);
 
 app.get('/v2/files', newFiles.findAll);
 app.get('/v2/files/:id', newFiles.findById);
