@@ -15,6 +15,11 @@ var db = MongoClient.connect("mongodb://mongo:mongo@kahana.mongohq.com:10077/app
     }
 });
 
+exports.deprecated = function(req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.send({'error':'Deprecated. please use /v2/* moving forward.'});
+}
+
 exports.findById = function(req, res) {
     var id = req.params.id;
     console.log('Retrieving file: ' + id);
