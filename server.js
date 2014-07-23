@@ -1,12 +1,17 @@
-
 var express = require('express'),
-files = require('./routes/files');
+    mongo = require('mongodb'),
+    mongoose = require('mongoose'),
+    files = require('./routes/files'),
+    newFiles = require('./routes/new-files');
  
 var app = express();
 
+// Database Connection
+mongoose.connect('mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755');
+
 app.configure(function () {
-app.use(express.logger('dev')); /* 'default', 'short', 'tiny', 'dev' */
-app.use(express.bodyParser());
+    app.use(express.logger('dev')); /* 'default', 'short', 'tiny', 'dev' */
+    app.use(express.bodyParser());
 });
 
 app.use(express.methodOverride());
@@ -29,12 +34,19 @@ var allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
  
-app.get('/files', files.findAll);
-app.get('/files/:id', files.findById);
-app.post('/files', files.addFile);
-app.put('/files/:id', files.updateFile);
-app.delete('/files/:id', files.deleteFile);
-app.get('/raml/:id', files.getRaml);
+//app.get('/files', files.findAll);
+//app.get('/files/:id', files.findById);
+//app.post('/files', files.addFile);
+//app.put('/files/:id', files.updateFile);
+//app.delete('/files/:id', files.deleteFile);
+//app.get('/raml/:id', files.getRaml);
+
+app.get('/v2/files', newFiles.findAll);
+app.get('/v2/files/:id', newFiles.findById);
+app.post('/v2/files', newFiles.addFile);
+app.put('/v2/files/:id', newFiles.updateFile);
+app.delete('/v2/files/:id', newFiles.deleteFile);
+app.get('/v2/raml/:id', newFiles.getRaml);
 
 
 app.listen(process.env.PORT || 5000);
