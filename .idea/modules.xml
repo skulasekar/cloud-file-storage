@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/raml-store.iml" filepath="$PROJECT_DIR$/.idea/raml-store.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cloud-file-store.iml" filepath="$PROJECT_DIR$/.idea/cloud-file-store.iml" />
     </modules>
   </component>
 </project>

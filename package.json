@@ -1,6 +1,6 @@
 {
-  "name": "raml-files",
-  "description": "Remote RAML File Store API",
+  "name": "cloud-file-store",
+  "description": "Remote File Store API",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
