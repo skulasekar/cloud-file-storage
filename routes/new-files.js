@@ -89,7 +89,7 @@ exports.addFile = function(req, res) {
         if (!err) {
             console.log("created");
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(file);
+            res.send('{ "status" : "created"}');
         } else {
             console.log(err);
             res.send({'error':'An error has occurred'});

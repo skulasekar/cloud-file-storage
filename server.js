@@ -7,7 +7,7 @@ var express = require('express'),
 var app = express();
 
 // Database Connection
-mongoose.connect('mongodb://mongo:mongo@kahana.mongohq.com:10077/app25960755');
+mongoose.connect('mongodb://mongo:mongo@@linus.mongohq.com:10081/app30354693');
 
 app.configure(function () {
     app.use(express.logger('dev')); /* 'default', 'short', 'tiny', 'dev' */
@@ -35,19 +35,16 @@ var allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
  
 app.get('/files', newFiles.findAll);
+
 app.get('/files/:id', newFiles.findById);
+
 app.post('/files', newFiles.addFile);
+
 app.put('/files/:id', newFiles.updateFile);
+
 app.delete('/files/:id', newFiles.deleteFile);
+
 app.get('/raml/:id', newFiles.getRaml);
-
-app.get('/v2/files', newFiles.findAll);
-app.get('/v2/files/:id', newFiles.findById);
-app.post('/v2/files', newFiles.addFile);
-app.put('/v2/files/:id', newFiles.updateFile);
-app.delete('/v2/files/:id', newFiles.deleteFile);
-app.get('/v2/raml/:id', newFiles.getRaml);
-
 
 app.listen(process.env.PORT || 5000);
 console.log('Listening on port 5000...');
