@@ -7,7 +7,7 @@ var express = require('express'),
 var app = express();
 
 // Database Connection
-mongoose.connect('mongodb://mongo:mongo@@linus.mongohq.com:10081/app30354693');
+mongoose.connect('mongodb://mongo:mongo@linus.mongohq.com:10081/app30354693');
 
 app.configure(function () {
     app.use(express.logger('dev')); /* 'default', 'short', 'tiny', 'dev' */
